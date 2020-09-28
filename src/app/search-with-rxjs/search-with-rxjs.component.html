@@ -1,1 +1,28 @@
-<p>search-with-rxjs works!</p>
+<h1>Github Repositories Search</h1>
+
+<label class="mt-2">
+    <span>Repository name:</span>
+
+    <input type="text" class="ml-2" (input)="onTextChange($event.target.value)" />
+</label>
+
+<hr>
+
+<div *ngIf="(searchResult$ | async) as searchResult">
+    <h2>Repositories</h2>
+
+    <ng-container [ngSwitch]="searchResult.items.length">
+        <ng-container *ngSwitchCase="0">
+            No results found
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+            <div *ngFor="let result of searchResult.items" class="flex flex-col shadow rounded my-3 p-4 bg-white">
+                <a href="{{ result.html_url }}" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-800 mb-1 hover:text-gray-900 hover:font-bold">{{ result.name }}</a>
+                <div>{{ result.description }}</div>
+                <div>{{ result.language }}</div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>
