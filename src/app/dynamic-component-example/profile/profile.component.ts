@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const viewContainerRef = this.profileHost.viewContainerRef;
-    debugger;
     this.profileService.isLoggedIn$.pipe(
       takeUntil(this.destroy$),
       mergeMap((isLoggedIn: boolean) => this.profileService.loadComponent(viewContainerRef, isLoggedIn))
